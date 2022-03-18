@@ -1,5 +1,6 @@
 package com.example.tuitionpoint;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityOptionsCompat;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,6 +39,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        if (view == button_signin) {
+            Intent intent = new Intent(getApplicationContext(), StudentHome.class);
+            // below method is used to make scene transition
+            // and adding fade animation in it.
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this, card_signin, "card");
+            // starting our activity with below method.
+            startActivity(intent, options.toBundle());
+//            startActivity(new Intent(getApplicationContext(), StudentHome.class));
+//            finish();
+        }
         if (view == text_signin) {
             card_signin.setVisibility(View.GONE);
             card_signup.setVisibility(View.VISIBLE);

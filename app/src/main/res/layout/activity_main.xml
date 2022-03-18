@@ -14,17 +14,22 @@
         android:gravity="center"
         android:text="welcome to tuition point...\nchoose your login type:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/card_student"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="100dp"
-        app:cardElevation="11dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:transitionName="card"
         app:cardCornerRadius="11dp"
+        app:cardElevation="11dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".2"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,25 +39,32 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="21dp"
             android:src="@drawable/student" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_teacher"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="21dp"
-        app:cardElevation="11dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:transitionName="card"
         app:cardCornerRadius="11dp"
+        app:cardElevation="11dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent=".2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/card_student"
         app:layout_constraintWidth_percent=".45">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="21dp"
             android:src="@drawable/teacher" />
     </androidx.cardview.widget.CardView>
 
