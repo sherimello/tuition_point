@@ -37,5 +37,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // starting our activity with below method.
             startActivity(intent, options.toBundle());
         }
+        if (view == card_teacher) {
+            Intent intent = new Intent(MainActivity.this, TutorHome.class);
+            // below method is used to make scene transition
+            // and adding fade animation in it.
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    MainActivity.this, card_student, "card");
+            // starting our activity with below method.
+            startActivity(intent, options.toBundle());
+        }
     }
 }

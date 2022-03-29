@@ -4,36 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".Login">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_signin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="21dp"
         android:transitionName="card"
-        app:cardBackgroundColor="#CEDBFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="11dp"
         android:visibility="visible"
-        app:cardElevation="11dp">
+        app:cardBackgroundColor="#CEDBFF"
+        app:cardCornerRadius="11dp"
+        app:cardElevation="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center">
+
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="11dp"
-                    >
+                    android:paddingTop="11dp">
 
                     <TextView
                         android:id="@+id/textView2"
@@ -99,13 +100,13 @@
                         android:id="@+id/text_signin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="11dp"
+                        android:gravity="center"
                         android:text="new here? sign up."
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_margin="11dp"
-                        android:gravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/button" />
@@ -120,29 +121,29 @@
         android:id="@+id/card_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="21dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="#CEDBFF"
+        app:cardCornerRadius="19dp"
+        app:cardElevation="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="21dp"
-        app:cardBackgroundColor="#CEDBFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
-        app:cardCornerRadius="19dp"
-        app:cardElevation="11dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center">
+
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="11dp"
-                    >
+                    android:padding="11dp">
 
                     <TextView
                         android:id="@+id/text_signup_title"
@@ -191,6 +192,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/edit_fullname" />
+
                     <EditText
                         android:id="@+id/edit_student_id"
                         android:layout_width="match_parent"
@@ -207,6 +209,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/edit_study_level" />
+
                     <EditText
                         android:id="@+id/edit_student_institution"
                         android:layout_width="match_parent"
@@ -223,6 +226,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/edit_student_id" />
+
                     <EditText
                         android:id="@+id/edit_student_phone"
                         android:layout_width="match_parent"
@@ -239,6 +243,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/edit_student_institution" />
+
                     <EditText
                         android:id="@+id/edit_student_address"
                         android:layout_width="match_parent"
@@ -255,6 +260,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/edit_student_phone" />
+
                     <EditText
                         android:id="@+id/edit_signup_mail"
                         android:layout_width="match_parent"
@@ -305,13 +311,13 @@
                         android:id="@+id/text_signup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="11dp"
+                        android:gravity="center"
                         android:text="already have an account? sign in."
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_margin="11dp"
-                        android:gravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/button_signup" />

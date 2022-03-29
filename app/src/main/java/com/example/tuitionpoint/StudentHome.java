@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class StudentHome extends AppCompatActivity {
 
-
     private TextView text_welcome;
 
     @Override
