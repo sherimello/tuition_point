@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="21dp"
         android:transitionName="card"
-        android:visibility="visible"
+        android:visibility="gone"
         app:cardBackgroundColor="#CEDBFF"
         app:cardCornerRadius="11dp"
         app:cardElevation="11dp"
@@ -72,6 +72,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="11dp"
+                        android:layout_marginTop="12dp"
                         android:drawableStart="@drawable/password"
                         android:drawablePadding="9dp"
                         android:hint="*******"
@@ -122,7 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="21dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:cardBackgroundColor="#CEDBFF"
         app:cardCornerRadius="19dp"
         app:cardElevation="11dp"
@@ -327,6 +328,88 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/layout_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99000000"
+        android:elevation="11dp"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="19dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="11dp"
+            app:cardElevation="21dp"
+            tools:layout_editor_absoluteX="19dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+<!--                <ProgressBar-->
+<!--                    android:layout_width="31dp"-->
+<!--                    android:layout_height="31dp"-->
+<!--                    android:indeterminateTint="#779BFF"-->
+<!--                    android:layout_margin="21dp"-->
+<!--                    android:visibility="gone"-->
+<!--                    />-->
+
+                <ImageView
+                    android:id="@+id/image_loading"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_margin="11dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/loading"
+                    app:layout_constraintBottom_toTopOf="@+id/progressBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginBottom="21dp"
+                    android:indeterminateTint="#779BFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginEnd="21dp"
+                    android:fontFamily="@font/rounded_elegance"
+                    android:gravity="center"
+                    android:text="checking log state..."
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/progressBar"
+                    app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -386,6 +386,26 @@
 
     </ScrollView>
 
+
+    <TextView
+        android:id="@+id/text_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="17dp"
+        android:drawableStart="@drawable/logout"
+        android:drawablePadding="7dp"
+        android:drawableTint="#779BFF"
+        android:fontFamily="@font/rounded_elegance"
+        android:gravity="center"
+        android:text="logout"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/cardSend"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardSend"
         android:layout_width="wrap_content"

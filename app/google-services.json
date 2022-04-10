@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "175028644310",
+    "firebase_url": "https://tuition-point-57df4-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "tuition-point-57df4",
+    "storage_bucket": "tuition-point-57df4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175028644310:android:a62cfb80105887ed615c77",
+        "android_client_info": {
+          "package_name": "com.example.tuitionpoint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175028644310-6uev87m1mo6v8s1atrq2484799ch605i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA21OZlLi-F2yWOWplj9djqROfeKdhgSvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175028644310-6uev87m1mo6v8s1atrq2484799ch605i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
