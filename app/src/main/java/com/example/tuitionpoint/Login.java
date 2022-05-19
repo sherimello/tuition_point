@@ -1,7 +1,7 @@
 package com.example.tuitionpoint;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityOptionsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.tuitionpoint.classes.Constants;
 import com.example.tuitionpoint.classes.StudentData;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,13 +33,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private Button button_signin, button_signup;
     private CardView card_signin, card_signup;
-    private TextView text_signin, text_signup;
+    private TextView text_signin, text_signup, text_progress_dialog;
     private FirebaseAuth mAuth;
     private LinearLayout layout_loading;
     private ImageView image_loading;
-    private ProgressDialog progressDialog;
     private EditText edit_fullname, edit_study_level, edit_student_id, edit_student_institution, edit_student_phone, edit_student_address,
-            edit_signup_mail, edit_signup_password;
+            edit_signup_mail, edit_signup_password, edit_login_mail, edit_login_password;
 
 
     @Override
@@ -46,14 +46,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        progressDialog = new ProgressDialog(Login.this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("checking log state...");
-        progressDialog.setIcon(R.drawable.loading);
-//        progressDialog.show();
-
-// ...
-// Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         button_signin = findViewById(R.id.button);
         button_signup = findViewById(R.id.button_signup);
@@ -63,6 +55,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         text_signin = findViewById(R.id.text_signin);
         text_signup = findViewById(R.id.text_signup);
+        text_progress_dialog = findViewById(R.id.text_progress_dialog);
 
         edit_fullname = findViewById(R.id.edit_fullname);
         edit_signup_mail = findViewById(R.id.edit_signup_mail);
@@ -72,6 +65,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         edit_student_institution = findViewById(R.id.edit_student_institution);
         edit_student_phone = findViewById(R.id.edit_student_phone);
         edit_study_level = findViewById(R.id.edit_study_level);
+        edit_login_mail = findViewById(R.id.edit_login_mail);
+        edit_login_password = findViewById(R.id.edit_login_password);
 
         image_loading = findViewById(R.id.image_loading);
 
@@ -103,12 +98,61 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     }
 
+    private void show_snackBar(String msg) {
+        Snackbar.make(edit_fullname, msg, Snackbar.LENGTH_SHORT).show();
+    }
+
+    private String button_name = "";
+
     private void updateUI(FirebaseUser currentUser) {
         if (currentUser == null) {
             return;
         }
-        startActivity(new Intent(getApplicationContext(), StudentHome.class));
-        finish();
+
+        layout_loading.setVisibility(View.GONE);
+        if (button_name.equals("reg")) {
+
+            SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+            SharedPreferences.Editor myEdit = sharedPreferences.edit();
+            myEdit.putString("username", Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()).substring(0, edit_signup_mail.getText().toString().trim()
+                    .indexOf('@')));
+            myEdit.apply();
+            Intent intent = new Intent(getApplicationContext(), StudentHome.class);
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    Login.this, card_signup, "card");
+            startActivity(intent, options.toBundle());
+        }
+        if (button_name.equals("login")) {
+
+            SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+            SharedPreferences.Editor myEdit = sharedPreferences.edit();
+            myEdit.putString("username", edit_login_mail.getText().toString().trim().substring(0, edit_login_mail.getText().toString().trim()
+                    .indexOf('@')));
+            myEdit.apply();
+            Intent intent = new Intent(getApplicationContext(), StudentHome.class);
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    Login.this, card_signin, "card");
+            startActivity(intent, options.toBundle());
+        } else {
+            startActivity(new Intent(getApplicationContext(), StudentHome.class));
+            finish();
+        }
+    }
+
+
+    private void sign_in() {
+        mAuth.signInWithEmailAndPassword(edit_login_mail.getText().toString().trim(), edit_login_password.getText().toString().trim())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        updateUI(mAuth.getCurrentUser());
+                        return;
+                    }
+                    layout_loading.setVisibility(View.GONE);
+                    show_snackBar(Objects.requireNonNull(task.getException()).getMessage());
+                }).addOnCanceledListener(() -> show_snackBar("connection cancelled. try again later")).addOnFailureListener(e -> {
+            show_snackBar(e.getLocalizedMessage());
+            layout_loading.setVisibility(View.GONE);
+        });
     }
 
     private void register(String email, String password) {
@@ -142,9 +186,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void uploadData() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://tuition-point-57df4-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("student data")
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance(new Constants().databaseAddress).getReference("student data")
                 .child(edit_signup_mail.getText().toString().trim().substring(0, edit_signup_mail.getText().toString().trim()
-                .indexOf('@')));
+                        .indexOf('@')));
         databaseReference.setValue(new StudentData(edit_signup_mail.getText().toString().trim(), edit_signup_password.getText().toString().trim(), edit_fullname.getText().toString().trim(), edit_student_address.getText().toString().trim()
                 , edit_student_phone.getText().toString().trim(), edit_study_level.getText().toString().trim(), edit_student_institution.getText().toString().trim(),
                 edit_student_id.getText().toString().trim())).addOnCompleteListener(task1 -> updateUI(mAuth.getCurrentUser())).addOnCanceledListener(() -> Snackbar.make(edit_fullname, "oops! try again later!", Snackbar.LENGTH_SHORT).show());
@@ -155,13 +199,28 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view == button_signup) {
-            register(edit_signup_mail.getText().toString().trim(), edit_signup_password.getText().toString().trim());
+            if (!edit_fullname.getText().toString().trim().isEmpty() && !edit_study_level.getText().toString().trim().isEmpty() &&
+                    !edit_student_phone.getText().toString().trim().isEmpty() && !edit_student_id.getText().toString().trim().isEmpty() &&
+                    !edit_signup_password.getText().toString().trim().isEmpty() && !edit_signup_mail.getText().toString().trim().isEmpty() &&
+                    !edit_student_institution.getText().toString().trim().isEmpty() && !edit_student_address.getText().toString().trim().isEmpty()) {
+                text_progress_dialog.setText("setting you up...");
+                layout_loading.setVisibility(View.VISIBLE);
+                button_name = "reg";
+                register(edit_signup_mail.getText().toString().trim(), edit_signup_password.getText().toString().trim());
+                return;
+            }
+
+            show_snackBar("make sure no field is empty!");
+
         }
         if (view == button_signin) {
-            Intent intent = new Intent(getApplicationContext(), StudentHome.class);
-            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    this, card_signin, "card");
-            startActivity(intent, options.toBundle());
+            if (!edit_login_mail.getText().toString().trim().isEmpty() && !edit_login_password.getText().toString().trim().isEmpty()) {
+                text_progress_dialog.setText("setting you up...");
+                layout_loading.setVisibility(View.VISIBLE);
+                button_name = "login";
+                sign_in();
+            } else
+                show_snackBar("make sure no field is empty!");
         }
         if (view == text_signin) {
             card_signin.setVisibility(View.GONE);

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="21dp"
         android:transitionName="card"
-        android:visibility="gone"
+        android:visibility="visible"
         app:cardBackgroundColor="#CEDBFF"
         app:cardCornerRadius="11dp"
         app:cardElevation="11dp"
@@ -51,7 +51,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
-                        android:id="@+id/editText"
+                        android:id="@+id/edit_login_mail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="11dp"
@@ -68,7 +68,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                     <EditText
-                        android:id="@+id/editText2"
+                        android:id="@+id/edit_login_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="11dp"
@@ -81,7 +81,7 @@
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/editText" />
+                        app:layout_constraintTop_toBottomOf="@+id/edit_login_mail" />
 
                     <Button
                         android:id="@+id/button"
@@ -95,7 +95,7 @@
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+                        app:layout_constraintTop_toBottomOf="@+id/edit_login_password" />
 
                     <TextView
                         android:id="@+id/text_signin"
@@ -123,7 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="21dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:cardBackgroundColor="#CEDBFF"
         app:cardCornerRadius="19dp"
         app:cardElevation="11dp"
@@ -390,7 +390,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/text_progress_dialog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="11dp"
