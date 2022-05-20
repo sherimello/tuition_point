@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".StudentHome">
 
     <TextView
@@ -26,9 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="21dp"
+        android:transitionName="card"
         app:cardBackgroundColor="#CEDBFF"
         app:cardCornerRadius="11dp"
-        android:transitionName="card"
         app:cardElevation="11dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,11 +50,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="7dp"
-                    app:cardCornerRadius="1000dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="#779BFF"
                     android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="#779BFF"
+                    app:cardCornerRadius="1000dp"
                     app:cardElevation="0dp">
 
                     <TextView
@@ -75,10 +76,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="7dp"
-                    app:cardCornerRadius="1000dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="1000dp"
                     app:cardElevation="0dp">
 
                     <TextView
@@ -100,10 +101,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="7dp"
-                    app:cardCornerRadius="1000dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"
+                    app:cardCornerRadius="1000dp"
                     app:cardElevation="0dp">
 
                     <TextView
@@ -151,7 +152,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="11dp">
 
             <TextView
                 android:id="@+id/text_make_post"
@@ -312,36 +314,58 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="#779BFF"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+                app:layout_constraintBottom_toBottomOf="@+id/linear_address"
                 app:layout_constraintStart_toStartOf="@+id/textView9"
-                app:layout_constraintTop_toTopOf="@+id/cardView2" />
+                app:layout_constraintTop_toTopOf="@+id/linear_address" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linear_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="11dp"
-                app:cardBackgroundColor="#F0F3FD"
-                app:cardCornerRadius="11dp"
-                app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView10"
                 app:layout_constraintTop_toBottomOf="@id/textView9">
 
-                <EditText
-                    android:id="@+id/edit_student_address"
-                    android:layout_width="match_parent"
+                <Spinner
+                    android:id="@+id/spinner_districts"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/cardView2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     android:layout_margin="11dp"
-                    android:background="@null"
-                    android:fontFamily="@font/rounded_elegance"
-                    android:gravity="start"
-                    android:hint="e.g. Road #02, IDK Area, Chittagong"
-                    android:maxLines="3"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="11dp"
+                    app:cardBackgroundColor="#F0F3FD"
+                    app:cardCornerRadius="11dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_districts">
+
+                    <EditText
+                        android:id="@+id/edit_student_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="11dp"
+                        android:background="@null"
+                        android:fontFamily="@font/rounded_elegance"
+                        android:gravity="start"
+                        android:hint="e.g. Road #02, IDK Area, Chittagong"
+                        android:maxLines="3"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
             <TextView
@@ -367,7 +391,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@id/cardView2">
+                app:layout_constraintTop_toBottomOf="@id/linear_address">
 
                 <EditText
                     android:id="@+id/edit_description"
@@ -443,6 +467,7 @@
 
 
     </androidx.cardview.widget.CardView>
+
     <LinearLayout
         android:id="@+id/layout_loading"
         android:layout_width="match_parent"
@@ -470,9 +495,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:gravity="center"
-                >
+                android:orientation="vertical">
                 <!--                <ProgressBar-->
                 <!--                    android:layout_width="31dp"-->
                 <!--                    android:layout_height="31dp"-->

@@ -5,10 +5,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -17,12 +22,16 @@ import com.example.tuitionpoint.classes.TuitionRequest;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.MessageFormat;
 import java.util.Objects;
 
-public class StudentHome extends AppCompatActivity implements View.OnClickListener {
+public class StudentHome extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private TextView text_welcome, text_logout;
     private CardView cardSend;
@@ -30,6 +39,8 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
     private LinearLayout layout_loading;
     private FirebaseUser currentUser;
     private Constants constants;
+    private Spinner spinner_districts;
+    private String district="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +65,59 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
 
         layout_loading = findViewById(R.id.layout_loading);
 
+        spinner_districts = findViewById(R.id.spinner_districts);
+
+        spinner_districts.setOnItemSelectedListener(this);
+        ArrayAdapter<String> ad
+                = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.bd_districts));
+
+        // set simple layout resource file
+        // for each item of spinner
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        // Set the ArrayAdapter (ad) data on the
+        // Spinner which binds data to spinner
+        spinner_districts.setAdapter(ad);
+
         text_welcome.setAlpha(0);
         text_welcome.setTranslationX(-100);
 
-        new Handler().postDelayed(() -> {
-            text_welcome.animate().alpha(1).translationX(0).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(1000).start();
-
-        }, 700);
+        getUserNameAndDisplayIt();
 
         text_logout.setOnClickListener(this);
         cardSend.setOnClickListener(this);
 
+    }
+
+    private void getUserNameAndDisplayIt() {
+        FirebaseDatabase.getInstance(constants.databaseAddress).getReference("student data")
+                .child(constants.getUserName(Objects.requireNonNull(currentUser.getEmail()))).child("fullname")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Toast.makeText(getApplicationContext(), String.valueOf(snapshot.getValue()), Toast.LENGTH_SHORT).show();
+                        String tempName = String.valueOf(snapshot.getValue());
+                        if (String.valueOf(snapshot.getValue()).length() > 16) {
+                            tempName = String.valueOf(snapshot.getValue()).substring(0, 16) + "...";
+                        }
+                        text_welcome.setText(MessageFormat.format("welcome {0},", tempName));
+                        new Handler().postDelayed(() -> {
+                            text_welcome.animate().alpha(1).translationX(0).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(1000).start();
+
+                        }, 700);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 
     @Override
@@ -73,6 +126,7 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
             if (!check_if_editText_is_empty()) {
                 layout_loading.setVisibility(View.VISIBLE);
                 send_tuition_request();
+                return;
             }
             show_snackBar("make sure all fields are filled!");
         }
@@ -102,7 +156,7 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
         if (edit_name.getText().toString().trim().isEmpty() || edit_class.getText().toString().trim().isEmpty()
                 || edit_subject.getText().toString().trim().isEmpty() || edit_days.getText().toString().trim().isEmpty()
                 || edit_salary.getText().toString().trim().isEmpty() || edit_student_address.getText().toString().trim().isEmpty()
-                || edit_description.getText().toString().trim().isEmpty()) {
+                || edit_description.getText().toString().trim().isEmpty() || district.isEmpty()) {
             return true;
         }
 
@@ -114,18 +168,33 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
         DatabaseReference databaseReference = FirebaseDatabase.getInstance(constants.databaseAddress).getReference();
         String key = databaseReference.push().getKey();
         assert key != null;
-        databaseReference.child("Tuition Requests").child(key).setValue(new TuitionRequest(edit_name.getText().toString().trim(),
-                edit_class.getText().toString().trim(), edit_subject.getText().toString().trim(), edit_days.getText().toString().trim(),
-                edit_salary.getText().toString().trim(), edit_student_address.getText().toString().trim(), edit_description.getText().toString().trim(), "0"))
+        databaseReference.child("Tuition Requests").child(key).setValue(new TuitionRequest(edit_name.getText().toString().trim(), district,
+                        edit_class.getText().toString().trim(), edit_subject.getText().toString().trim(), edit_days.getText().toString().trim(),
+                        edit_salary.getText().toString().trim(), edit_student_address.getText().toString().trim(), edit_description.getText().toString().trim(), "0"))
                 .addOnCompleteListener(task -> databaseReference.child("student data").child(constants.getUserName(Objects.requireNonNull(currentUser.getEmail())))
                         .child("requests").push().setValue(key).addOnCompleteListener(task1 -> {
                             show_snackBar("Request sent!");
                             layout_loading.setVisibility(View.GONE);
                             clear_editTexts();
                         })).addOnFailureListener(e -> {
-            show_snackBar(e.getLocalizedMessage());
-            clear_editTexts();
-        });
+                    show_snackBar(e.getLocalizedMessage());
+                    clear_editTexts();
+                });
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+        district = getResources().getStringArray(R.array.bd_districts)[i];
+        Toast.makeText(this, "you're from: " + district, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+        Toast.makeText(this, "please choose a district to send a tuition request!", Toast.LENGTH_SHORT).show();
 
     }
 }

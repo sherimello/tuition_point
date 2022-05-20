@@ -1,308 +1,240 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    tools:context=".TutorHome">
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/text_welcome"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/main_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="?actionBarSize"
-        android:layout_marginEnd="21dp"
-        android:fontFamily="@font/rounded_elegance"
-        android:text="hello,\njohn wick"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_options"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="21dp"
-        android:transitionName="card"
-        app:cardBackgroundColor="#CEDBFF"
-        app:cardCornerRadius="11dp"
-        app:cardElevation="11dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_welcome">
-
-        <ScrollView
-            android:id="@+id/scrollView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="17dp"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:cardBackgroundColor="#779BFF"
-                    app:cardCornerRadius="1000dp"
-                    app:cardElevation="0dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="11dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginEnd="11dp"
-                        android:layout_marginBottom="7dp"
-                        android:fontFamily="@font/rounded_elegance"
-                        android:includeFontPadding="false"
-                        android:text="Home"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:cardCornerRadius="1000dp"
-                    app:cardElevation="0dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="11dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginEnd="11dp"
-                        android:layout_marginBottom="7dp"
-                        android:fontFamily="@font/rounded_elegance"
-                        android:includeFontPadding="false"
-                        android:text="profile"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="7dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:cardCornerRadius="1000dp"
-                    app:cardElevation="0dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="11dp"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginEnd="11dp"
-                        android:layout_marginBottom="7dp"
-                        android:fontFamily="@font/rounded_elegance"
-                        android:includeFontPadding="false"
-                        android:text="teacher"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-        </ScrollView>
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/rounded_elegance"
-        android:text="latest posts"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/black"
-        android:layout_margin="17dp"
-        android:drawablePadding="7dp"
-        android:drawableTint="#779BFF"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/card_options"
-        app:drawableStartCompat="@drawable/new_post" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="11dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_popup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="27dp"
-        android:visibility="gone"
-        app:cardBackgroundColor="#ffffff"
-        app:cardCornerRadius="21dp"
-        app:cardElevation="21dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="11dp">
+            android:elevation="0dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:elevation="0dp">
 
-            <TextView
-                android:id="@+id/text_about_you"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingtoolbarly"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="21dp"
-                android:fontFamily="@font/rounded_elegance"
-                android:gravity="center"
-                android:text="your proposal"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent"
+                android:elevation="0dp"
+                android:fitsSystemWindows="true"
+                app:collapsedTitleGravity="start"
+                app:collapsedTitleTextAppearance="@style/TextAppearance.Collapsed"
+                app:contentScrim="#ffffff"
+                app:expandedTitleTextAppearance="@style/TextAppearance.Expanded"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+                app:title="latest posts:">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="21dp"
-                android:layout_marginEnd="11dp"
-                app:cardBackgroundColor="#F0F3FD"
-                app:cardCornerRadius="21dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_about_you">
 
-                <EditText
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_headings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="7dp"
-                    android:background="@null"
-                    android:fontFamily="@font/rounded_elegance"
-                    android:gravity="center"
-                    android:hint="\n\ne.g. i am interested...\n\n"
-                    android:maxLines="7"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/black" />
+                    android:background="@color/white"
+                    app:layout_collapseMode="parallax">
 
-            </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/text_welcome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="21dp"
+                        android:layout_marginTop="?actionBarSize"
+                        android:layout_marginEnd="21dp"
+                        android:fontFamily="@font/rounded_elegance"
+                        android:text="hello,\njohn wick"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_options"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="21dp"
+                        android:transitionName="card"
+                        app:cardBackgroundColor="#CEDBFF"
+                        app:cardCornerRadius="11dp"
+                        app:cardElevation="11dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_welcome">
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="11dp"
-                android:text="phone:"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#779BFF"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/cardView2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/cardView2" />
+                        <ScrollView
+                            android:id="@+id/scrollView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="11dp"
-                app:cardBackgroundColor="#F0F3FD"
-                app:cardCornerRadius="11dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@id/cardView3">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="17dp"
+                                android:orientation="horizontal">
 
-                <EditText
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="7dp"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:foreground="?android:attr/selectableItemBackground"
+                                    app:cardBackgroundColor="#779BFF"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="11dp"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginEnd="11dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:fontFamily="@font/rounded_elegance"
+                                        android:includeFontPadding="false"
+                                        android:text="Home"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                        android:textColor="@color/white"
+                                        android:textStyle="bold" />
+                                </androidx.cardview.widget.CardView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/card_profile"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="7dp"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:foreground="?android:attr/selectableItemBackground"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="11dp"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginEnd="11dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:fontFamily="@font/rounded_elegance"
+                                        android:includeFontPadding="false"
+                                        android:text="profile"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                        android:textColor="@color/black"
+                                        android:textStyle="bold" />
+                                </androidx.cardview.widget.CardView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="7dp"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:foreground="?android:attr/selectableItemBackground"
+                                    app:cardCornerRadius="1000dp"
+                                    app:cardElevation="0dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="11dp"
+                                        android:layout_marginTop="7dp"
+                                        android:layout_marginEnd="11dp"
+                                        android:layout_marginBottom="7dp"
+                                        android:fontFamily="@font/rounded_elegance"
+                                        android:includeFontPadding="false"
+                                        android:text="teacher"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                        android:textColor="@color/black"
+                                        android:textStyle="bold" />
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+                        </ScrollView>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="17dp"
+                        android:drawablePadding="7dp"
+                        android:drawableTint="#779BFF"
+                        android:fontFamily="@font/rounded_elegance"
+                        android:gravity="center_vertical"
+                        android:includeFontPadding="false"
+                        android:text="filter location: "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/location"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/card_options" />
+
+                    <Spinner
+                        android:id="@+id/spinner_districts"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="17dp"
+                        android:backgroundTint="@color/black"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView12"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textView12"
+                        app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Toolbar
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="11dp"
-                    android:background="@null"
-                    android:fontFamily="@font/rounded_elegance"
-                    android:gravity="start"
-                    android:hint="e.g. 01xxxxxxxxx"
-                    android:maxLines="1"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/white"
+                    app:layout_collapseMode="pin"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_headings" />
 
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardSend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="17dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="#779BFF"
-                app:cardCornerRadius="1000dp"
-                app:cardElevation="11dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        </com.google.android.material.appbar.AppBarLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="17dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginEnd="17dp"
-                    android:layout_marginBottom="7dp"
-                    android:drawableStart="@drawable/send"
-                    android:drawablePadding="11dp"
-                    android:drawableTint="@color/white"
-                    android:fontFamily="@font/rounded_elegance"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="send"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            </androidx.cardview.widget.CardView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
-    </androidx.cardview.widget.CardView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,8 @@
 package com.example.tuitionpoint.adapter;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +12,20 @@ import android.view.animation.OvershootInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tuitionpoint.R;
+import com.example.tuitionpoint.SendTuitionRequest;
 
 public class TutorHomeAdapter extends RecyclerView.Adapter<TutorHomeAdapter.TutorHomeAdapterViewHolder> {
 
-    CardView card_popup;
+    Context context;
+    Activity activity;
 
-    public TutorHomeAdapter(CardView card_popup) {
-        this.card_popup = card_popup;
+    public TutorHomeAdapter(Context context, Activity activity) {
+        this.context = context;
+        this.activity = activity;
     }
 
     @NonNull
@@ -37,7 +44,16 @@ public class TutorHomeAdapter extends RecyclerView.Adapter<TutorHomeAdapter.Tuto
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                card_popup.setVisibility(View.VISIBLE);
+
+                Intent intent = new Intent(holder.cardView.getContext(), SendTuitionRequest.class);
+                // below method is used to make scene transition
+                // and adding fade animation in it.
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        activity, holder.cardView, "request card");
+                // starting our activity with below method.
+                activity.startActivity(intent, options.toBundle());
+
+//                card_popup.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -66,7 +82,7 @@ public class TutorHomeAdapter extends RecyclerView.Adapter<TutorHomeAdapter.Tuto
                 @Override
                 public void onAnimationEnd(Animation animation) {
 
-                    cardView.setLayerType(View.LAYER_TYPE_NONE,null);
+                    cardView.setLayerType(View.LAYER_TYPE_NONE, null);
 
                 }
 

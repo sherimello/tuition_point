@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.ScrollView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +20,7 @@ import com.example.tuitionpoint.adapter.TutorHomeAdapter;
 public class TutorProfile extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CardView card_popup;
-    private ScrollView scrollView;
+    private ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +29,10 @@ public class TutorProfile extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler);
         card_popup = findViewById(R.id.card_popup);
-        scrollView = findViewById(R.id.scrollView);
-
-        scrollView.fullScroll(View.FOCUS_DOWN);
-        scrollView.setSmoothScrollingEnabled(true);
+        constraintLayout = findViewById(R.id.drawer_layout);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
-        recyclerView.setAdapter(new TutorHomeAdapter(card_popup));
+        recyclerView.setAdapter(new TutorHomeAdapter(getApplicationContext(), this));
 
     }
 
@@ -47,7 +47,7 @@ public class TutorProfile extends AppCompatActivity {
         // below method is used to make scene transition
         // and adding fade animation in it.
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                TutorProfile.this, scrollView, "card");
+                TutorProfile.this, constraintLayout, "card");
         // starting our activity with below method.
         startActivity(intent, options.toBundle());
         new Handler().postDelayed(this::finish, 1000);

@@ -13,4 +13,24 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="TextAppearance.Expanded" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/rounded_elegance</item>
+        <item name="android:fontFamily">@font/rounded_elegance</item>
+        <item name="android:textColorPrimary">@color/transparent</item>
+        <item name="android:textSize">0sp</item>
+        <item name="android:textColor">@color/transparent</item>
+    </style>
+
+    <style name="TextAppearance.Collapsed" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/rounded_elegance</item>
+        <item name="android:fontFamily">@font/rounded_elegance</item>
+        <item name="android:textStyle">bold</item>
+        <item name="backgroundColor">@color/black</item>
+        <item name="android:drawableStart">@drawable/new_post</item>
+        <item name="drawableTint">#779BFF</item>
+        <item name="android:drawablePadding">7dp</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

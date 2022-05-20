@@ -1,11 +1,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/constraintLayout"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:fitsSystemWindows="true"
-    android:transitionName="card">
+    android:fitsSystemWindows="true">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/main_content"
@@ -28,7 +27,7 @@
                 android:fitsSystemWindows="true"
                 app:collapsedTitleGravity="start"
                 app:collapsedTitleTextAppearance="@style/TextAppearance.Collapsed"
-                app:contentScrim="#ffffff"
+                app:contentScrim="#779BFF"
                 app:expandedTitleTextAppearance="@style/TextAppearance.Expanded"
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
                 app:title="pending applications:">
@@ -76,9 +75,9 @@
                         android:background="@null"
                         android:fontFamily="@font/rounded_elegance"
                         android:hint="john wich"
+                        android:textColorHint="#50000000"
                         android:includeFontPadding="false"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColorHint="#50000000"
                         app:layout_constraintBottom_toBottomOf="@+id/textView5"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/textView5"
@@ -102,11 +101,11 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="17dp"
                         android:background="@null"
+                        android:textColorHint="#50000000"
                         android:fontFamily="@font/rounded_elegance"
                         android:hint="wickedJohnny"
                         android:includeFontPadding="false"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColorHint="#50000000"
                         app:layout_constraintBottom_toBottomOf="@+id/textView6"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/textView6"
@@ -127,6 +126,7 @@
                     <EditText
                         android:id="@+id/edit_subject"
                         android:layout_width="0dp"
+                        android:textColorHint="#50000000"
                         android:layout_height="wrap_content"
                         android:layout_margin="17dp"
                         android:background="@null"
@@ -134,7 +134,6 @@
                         android:hint="B.Sc 1st year"
                         android:includeFontPadding="false"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColorHint="#50000000"
                         app:layout_constraintBottom_toBottomOf="@+id/textView7"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/textView7"
@@ -159,10 +158,10 @@
                         android:layout_margin="17dp"
                         android:background="@null"
                         android:fontFamily="@font/rounded_elegance"
+                        android:textColorHint="#50000000"
                         android:hint="IIUC"
                         android:includeFontPadding="false"
                         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColorHint="#50000000"
                         app:layout_constraintBottom_toBottomOf="@+id/textView8"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/textView8"
@@ -224,11 +223,11 @@
                             android:layout_margin="11dp"
                             android:background="@null"
                             android:fontFamily="@font/rounded_elegance"
+                            android:textColorHint="#50000000"
                             android:gravity="start"
                             android:hint="e.g. Road #02, IDK Area, Chittagong"
                             android:maxLines="3"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColorHint="#50000000" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -265,10 +264,10 @@
                             android:background="@null"
                             android:fontFamily="@font/rounded_elegance"
                             android:gravity="start"
+                            android:textColorHint="#50000000"
                             android:hint="\n\ne.g. IIUC students would be most preferable...\n\n"
                             android:maxLines="7"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColorHint="#50000000" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -277,11 +276,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="17dp"
+                        android:fontFamily="@font/rounded_elegance"
+                        android:text="pending applications:"
                         android:drawableStart="@drawable/pending"
                         android:drawablePadding="7dp"
                         android:drawableTint="#779BFF"
-                        android:fontFamily="@font/rounded_elegance"
-                        android:text="pending applications:"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         android:textColor="@color/black"
                         android:textStyle="bold"
@@ -297,7 +296,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraint_headings" />
+                    app:layout_constraintTop_toBottomOf="@+id/constraint_headings"/>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

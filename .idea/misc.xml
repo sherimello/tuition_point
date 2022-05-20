@@ -3,15 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/tuitionpoint/app/src/main/res/drawable/launch_background.xml" value="0.134" />
         <entry key="..\:/tuitionpoint/app/src/main/res/drawable/logout.xml" value="0.134" />
         <entry key="..\:/tuitionpoint/app/src/main/res/drawable/send.xml" value="0.1595" />
+        <entry key="..\:/tuitionpoint/app/src/main/res/layout/BD_locations_arraylist.xml" value="0.20512820512820512" />
         <entry key="..\:/tuitionpoint/app/src/main/res/layout/activity_login.xml" value="0.20555555555555555" />
         <entry key="..\:/tuitionpoint/app/src/main/res/layout/activity_main.xml" value="0.20512820512820512" />
+        <entry key="..\:/tuitionpoint/app/src/main/res/layout/activity_send_tuition_request.xml" value="0.1935897435897436" />
         <entry key="..\:/tuitionpoint/app/src/main/res/layout/activity_splash.xml" value="0.20253164556962025" />
         <entry key="..\:/tuitionpoint/app/src/main/res/layout/activity_student_home.xml" value="0.20253164556962025" />
         <entry key="..\:/tuitionpoint/app/src/main/res/layout/activity_teacher_login.xml" value="0.20253164556962025" />
         <entry key="..\:/tuitionpoint/app/src/main/res/layout/activity_tutor_home.xml" value="0.20253164556962025" />
         <entry key="..\:/tuitionpoint/app/src/main/res/layout/activity_tutor_profile.xml" value="0.20512820512820512" />
+        <entry key="..\:/tuitionpoint/app/src/main/res/layout/test.xml" value="0.20512820512820512" />
         <entry key="..\:/tuitionpoint/app/src/main/res/layout/tuition_card_layout.xml" value="0.20253164556962025" />
       </map>
     </option>
