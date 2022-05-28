@@ -10,6 +10,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,7 @@ public class TutorHome extends AppCompatActivity implements View.OnClickListener
     private CardView card_popup, card_profile, card_options;
     private Spinner spinner_districts;
     private String district = "";
+    private ConstraintLayout constraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class TutorHome extends AppCompatActivity implements View.OnClickListener
         card_popup = findViewById(R.id.card_popup);
         card_profile = findViewById(R.id.card_profile);
         card_options = findViewById(R.id.card_options);
+        constraintLayout = findViewById(R.id.drawer_layout);
 
 
         spinner_districts = findViewById(R.id.spinner_districts);

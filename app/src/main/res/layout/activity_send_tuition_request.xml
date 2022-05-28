@@ -7,16 +7,61 @@
     android:background="@color/white"
     tools:context=".SendTuitionRequest">
 
-    <ImageView
-        android:id="@+id/image_header"
-        android:layout_width="155dp"
-        android:layout_height="155dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/load"
+<!--    <ImageView-->
+<!--        android:id="@+id/image_header"-->
+<!--        android:layout_width="155dp"-->
+<!--        android:layout_height="155dp"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        android:src="@drawable/load"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/card_popup"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/logo_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/card_popup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rounded_elegance"
+            android:includeFontPadding="false"
+            android:text="tuition"
+            android:textColor="@color/black"
+            android:textSize="31sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView13"
+            app:layout_constraintEnd_toStartOf="@+id/image_logo"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/rounded_elegance"
+            android:includeFontPadding="false"
+            android:text="point"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image_logo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.cardview.widget.CardView
@@ -25,9 +70,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="27dp"
         android:visibility="visible"
-        app:cardBackgroundColor="#ffffff"
-        app:cardCornerRadius="21dp"
-        app:cardElevation="21dp"
+        app:cardBackgroundColor="#73e4dc"
+        app:cardCornerRadius="31dp"
+        app:cardElevation="0dp"
         android:transitionName="request card"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +82,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="11dp"
             android:padding="11dp">
 
             <TextView
@@ -62,7 +108,7 @@
                 android:layout_marginStart="11dp"
                 android:layout_marginTop="21dp"
                 android:layout_marginEnd="11dp"
-                app:cardBackgroundColor="#F0F3FD"
+                app:cardBackgroundColor="#EBEFEF"
                 app:cardCornerRadius="21dp"
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -79,6 +125,7 @@
                     android:gravity="center"
                     android:hint="\n\ne.g. i am interested...\n\n"
                     android:maxLines="7"
+                    android:textStyle="bold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/black" />
 
@@ -92,7 +139,7 @@
                 android:layout_marginStart="11dp"
                 android:text="phone:"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#779BFF"
+                android:textColor="#000000"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/cardView2"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +150,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="11dp"
-                app:cardBackgroundColor="#F0F3FD"
+                app:cardBackgroundColor="#EBEFEF"
                 app:cardCornerRadius="11dp"
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -119,6 +166,7 @@
                     android:fontFamily="@font/rounded_elegance"
                     android:gravity="start"
                     android:hint="e.g. 01xxxxxxxxx"
+                    android:textStyle="bold"
                     android:maxLines="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
@@ -132,9 +180,9 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="#779BFF"
-                app:cardCornerRadius="1000dp"
-                app:cardElevation="11dp"
+                app:cardBackgroundColor="#666666"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -144,10 +192,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginBottom="11dp"
                     android:layout_marginStart="17dp"
-                    android:layout_marginTop="7dp"
                     android:layout_marginEnd="17dp"
-                    android:layout_marginBottom="7dp"
                     android:drawableStart="@drawable/send"
                     android:drawablePadding="11dp"
                     android:drawableTint="@color/white"

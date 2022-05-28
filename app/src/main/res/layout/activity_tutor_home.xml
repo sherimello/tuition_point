@@ -1,9 +1,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:transitionName="card"
+    tools:context=".TutorHome"
     android:fitsSystemWindows="true">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -62,9 +65,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="21dp"
                         android:transitionName="card"
-                        app:cardBackgroundColor="#CEDBFF"
-                        app:cardCornerRadius="11dp"
-                        app:cardElevation="11dp"
+                        app:cardBackgroundColor="#8073E4DC"
+                        app:cardCornerRadius="23dp"
+                        app:cardElevation="0dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/text_welcome">
@@ -87,7 +90,7 @@
                                     android:clickable="true"
                                     android:focusable="true"
                                     android:foreground="?android:attr/selectableItemBackground"
-                                    app:cardBackgroundColor="#779BFF"
+                                    app:cardBackgroundColor="#666666"
                                     app:cardCornerRadius="1000dp"
                                     app:cardElevation="0dp">
 
@@ -167,7 +170,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="17dp"
                         android:drawablePadding="7dp"
-                        android:drawableTint="#779BFF"
+                        android:drawableTint="#73e4dc"
                         android:fontFamily="@font/rounded_elegance"
                         android:gravity="center_vertical"
                         android:includeFontPadding="false"

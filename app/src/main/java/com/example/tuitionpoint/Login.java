@@ -31,8 +31,8 @@ import java.util.Objects;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
-    private Button button_signin, button_signup;
-    private CardView card_signin, card_signup;
+    private Button button_signup;
+    private CardView card_signin, card_signup, card_sign_in;
     private TextView text_signin, text_signup, text_progress_dialog;
     private FirebaseAuth mAuth;
     private LinearLayout layout_loading;
@@ -47,11 +47,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        button_signin = findViewById(R.id.button);
         button_signup = findViewById(R.id.button_signup);
 
         card_signin = findViewById(R.id.card_signin);
         card_signup = findViewById(R.id.card_signup);
+        card_sign_in = findViewById(R.id.card_sign_in);
 
         text_signin = findViewById(R.id.text_signin);
         text_signup = findViewById(R.id.text_signup);
@@ -77,7 +77,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 .into(image_loading);
 
 
-        button_signin.setOnClickListener(this);
+        card_sign_in.setOnClickListener(this);
         button_signup.setOnClickListener(this);
         text_signup.setOnClickListener(this);
         text_signin.setOnClickListener(this);
@@ -213,7 +213,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             show_snackBar("make sure no field is empty!");
 
         }
-        if (view == button_signin) {
+        if (view == card_sign_in) {
             if (!edit_login_mail.getText().toString().trim().isEmpty() && !edit_login_password.getText().toString().trim().isEmpty()) {
                 text_progress_dialog.setText("setting you up...");
                 layout_loading.setVisibility(View.VISIBLE);

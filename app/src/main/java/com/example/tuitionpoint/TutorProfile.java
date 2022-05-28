@@ -19,7 +19,6 @@ import com.example.tuitionpoint.adapter.TutorHomeAdapter;
 
 public class TutorProfile extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private CardView card_popup;
     private ConstraintLayout constraintLayout;
 
     @Override
@@ -28,8 +27,7 @@ public class TutorProfile extends AppCompatActivity {
         setContentView(R.layout.activity_tutor_profile);
 
         recyclerView = findViewById(R.id.recycler);
-        card_popup = findViewById(R.id.card_popup);
-        constraintLayout = findViewById(R.id.drawer_layout);
+        constraintLayout = findViewById(R.id.constraintLayout);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerView.setAdapter(new TutorHomeAdapter(getApplicationContext(), this));
@@ -38,10 +36,10 @@ public class TutorProfile extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (card_popup.getVisibility() == View.VISIBLE) {
-            card_popup.setVisibility(View.GONE);
-            return;
-        }
+//        if (card_popup.getVisibility() == View.VISIBLE) {
+//            card_popup.setVisibility(View.GONE);
+//            return;
+//        }
 
         Intent intent = new Intent(getApplicationContext(), TutorHome.class);
         // below method is used to make scene transition
