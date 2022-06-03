@@ -106,17 +106,21 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private void updateUI(FirebaseUser currentUser) {
         if (currentUser == null) {
+            //if user creation fails, will terminate here...
             return;
         }
 
         layout_loading.setVisibility(View.GONE);
         if (button_name.equals("reg")) {
 
+            //executes only when registration button is clicked...
+
             SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
             SharedPreferences.Editor myEdit = sharedPreferences.edit();
             myEdit.putString("username", Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()).substring(0, edit_signup_mail.getText().toString().trim()
                     .indexOf('@')));
-            myEdit.apply();
+            myEdit.apply(); //sharedpreference saves the username for future user data query...
+
             Intent intent = new Intent(getApplicationContext(), StudentHome.class);
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     Login.this, card_signup, "card");
@@ -124,11 +128,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
         if (button_name.equals("login")) {
 
+            //executes only when login button is clicked...
+
             SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
             SharedPreferences.Editor myEdit = sharedPreferences.edit();
             myEdit.putString("username", edit_login_mail.getText().toString().trim().substring(0, edit_login_mail.getText().toString().trim()
                     .indexOf('@')));
-            myEdit.apply();
+            myEdit.apply(); //sharedpreference saves the username for future user data query...
+
             Intent intent = new Intent(getApplicationContext(), StudentHome.class);
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     Login.this, card_signin, "card");
@@ -141,9 +148,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
 
     private void sign_in() {
+        //signs in user to firebase Auth...
         mAuth.signInWithEmailAndPassword(edit_login_mail.getText().toString().trim(), edit_login_password.getText().toString().trim())
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+
+                        //decides where to send next...
                         updateUI(mAuth.getCurrentUser());
                         return;
                     }
@@ -156,6 +166,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void register(String email, String password) {
+
+        //registers user to firebase auth...
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (!task.isSuccessful()) {
@@ -176,8 +188,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     }
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "in", Toast.LENGTH_SHORT).show();
+
+                        //uploads the data of newly signed in user...
                         uploadData();
                     } else {
+                        text_progress_dialog.setText(Objects.requireNonNull(task.getException()).toString());
                         Toast.makeText(Login.this, "Authentication failed. \nerror message: " + task.getException(),
                                 Toast.LENGTH_SHORT).show();
                         updateUI(null);
@@ -186,9 +201,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void uploadData() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance(new Constants().databaseAddress).getReference("student data")
+
+        //uploading data to realtime database with child node fetched from user mail [e.g; c183018@gmail.com -> username: c183018]
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("student data")
                 .child(edit_signup_mail.getText().toString().trim().substring(0, edit_signup_mail.getText().toString().trim()
                         .indexOf('@')));
+
+
+        //after data is successfully uploaded, calls updateUI...
         databaseReference.setValue(new StudentData(edit_signup_mail.getText().toString().trim(), edit_signup_password.getText().toString().trim(), edit_fullname.getText().toString().trim(), edit_student_address.getText().toString().trim()
                 , edit_student_phone.getText().toString().trim(), edit_study_level.getText().toString().trim(), edit_student_institution.getText().toString().trim(),
                 edit_student_id.getText().toString().trim())).addOnCompleteListener(task1 -> updateUI(mAuth.getCurrentUser())).addOnCanceledListener(() -> Snackbar.make(edit_fullname, "oops! try again later!", Snackbar.LENGTH_SHORT).show());

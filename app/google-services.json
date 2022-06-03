@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "175028644310",
-    "firebase_url": "https://tuition-point-57df4-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "tuition-point-57df4",
-    "storage_bucket": "tuition-point-57df4.appspot.com"
+    "project_number": "19016926557",
+    "firebase_url": "https://tuition-point48-default-rtdb.firebaseio.com",
+    "project_id": "tuition-point48",
+    "storage_bucket": "tuition-point48.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:175028644310:android:a62cfb80105887ed615c77",
+        "mobilesdk_app_id": "1:19016926557:android:59318be850f7cb4cbb54b4",
         "android_client_info": {
           "package_name": "com.example.tuitionpoint"
         }
       },
       "oauth_client": [
         {
-          "client_id": "175028644310-6uev87m1mo6v8s1atrq2484799ch605i.apps.googleusercontent.com",
+          "client_id": "19016926557-ua2dnnrqtqmkm3a0tpacgprdm4uf9o3t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tuitionpoint",
+            "certificate_hash": "eb497f39d2ce5c0ca944a73c95523f3da42f0bd9"
+          }
+        },
+        {
+          "client_id": "19016926557-fnh1uf7o55b3glnhf4j14upec44ebvon.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA21OZlLi-F2yWOWplj9djqROfeKdhgSvg"
+          "current_key": "AIzaSyApSWZ3Q9_--jMJsuTIdMbMSQmj4ipItgM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "175028644310-6uev87m1mo6v8s1atrq2484799ch605i.apps.googleusercontent.com",
+              "client_id": "19016926557-fnh1uf7o55b3glnhf4j14upec44ebvon.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -95,7 +95,10 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
     }
 
     private void getUserNameAndDisplayIt() {
-        FirebaseDatabase.getInstance(constants.databaseAddress).getReference("student data")
+
+        //gets user's full name from realtime database and displays it...
+
+        FirebaseDatabase.getInstance().getReference("student data")
                 .child(constants.getUserName(Objects.requireNonNull(currentUser.getEmail()))).child("fullname")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -105,7 +108,7 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
                         if (String.valueOf(snapshot.getValue()).length() > 16) {
                             tempName = String.valueOf(snapshot.getValue()).substring(0, 16) + "...";
                         }
-                        text_welcome.setText(MessageFormat.format("welcome {0},", tempName));
+                        text_welcome.setText(MessageFormat.format("welcome {0},\n", tempName));
                         new Handler().postDelayed(() -> {
                             text_welcome.animate().alpha(1).translationX(0).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(1000).start();
 
@@ -131,6 +134,9 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
             show_snackBar("make sure all fields are filled!");
         }
         if (view == text_logout) {
+
+            //signs user out and redirects to login page...
+
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getApplicationContext(), Login.class));
             finish();
@@ -165,7 +171,9 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
 
     private void send_tuition_request() {
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance(constants.databaseAddress).getReference();
+        //sends user request to realtime database and stores the key of each request to the corresponding user node...
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         String key = databaseReference.push().getKey();
         assert key != null;
         databaseReference.child("Tuition Requests").child(key).setValue(new TuitionRequest(edit_name.getText().toString().trim(), district,
@@ -183,6 +191,7 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    //gets the current district name and stores it for later use...
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -191,6 +200,7 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    //if no district is chosen...
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
