@@ -30,7 +30,7 @@ public class TutorProfile extends AppCompatActivity {
         constraintLayout = findViewById(R.id.constraintLayout);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
-        recyclerView.setAdapter(new TutorHomeAdapter(getApplicationContext(), this));
+//        recyclerView.setAdapter(new TutorHomeAdapter(getApplicationContext(), this));
 
     }
 

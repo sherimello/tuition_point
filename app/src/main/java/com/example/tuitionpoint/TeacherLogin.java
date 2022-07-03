@@ -16,8 +16,8 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityOptionsCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.tuitionpoint.classes.Constants;
 import com.example.tuitionpoint.classes.StudentData;
+import com.example.tuitionpoint.classes.TeacherData;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -29,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
+public class TeacherLogin extends AppCompatActivity implements View.OnClickListener {
 
     private Button button_signup;
     private CardView card_signin, card_signup, card_sign_in;
@@ -37,14 +37,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
     private LinearLayout layout_loading;
     private ImageView image_loading;
-    private EditText edit_fullname, edit_study_level, edit_student_id, edit_student_institution, edit_student_phone, edit_student_address,
+    private EditText edit_fullname, edit_study_level, edit_student_institution, edit_student_phone, edit_student_address,
             edit_signup_mail, edit_signup_password, edit_login_mail, edit_login_password;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_teacher_login);
 
         mAuth = FirebaseAuth.getInstance();
         button_signup = findViewById(R.id.button_signup);
@@ -61,7 +61,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         edit_signup_mail = findViewById(R.id.edit_signup_mail);
         edit_signup_password = findViewById(R.id.edit_signup_password);
         edit_student_address = findViewById(R.id.edit_student_address);
-        edit_student_id = findViewById(R.id.edit_student_id);
         edit_student_institution = findViewById(R.id.edit_student_institution);
         edit_student_phone = findViewById(R.id.edit_student_phone);
         edit_study_level = findViewById(R.id.edit_study_level);
@@ -117,14 +116,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
             SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
             SharedPreferences.Editor myEdit = sharedPreferences.edit();
-            myEdit.putString("usertype", "student");
             myEdit.putString("username", Objects.requireNonNull(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail()).substring(0, edit_signup_mail.getText().toString().trim()
                     .indexOf('@')));
             myEdit.apply(); //sharedpreference saves the username for future user data query...
 
-            Intent intent = new Intent(getApplicationContext(), StudentHome.class);
+            Intent intent = new Intent(getApplicationContext(), TutorHome.class);
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    Login.this, card_signup, "card");
+                    TeacherLogin.this, card_signup, "card");
             startActivity(intent, options.toBundle());
         }
         if (button_name.equals("login")) {
@@ -137,12 +135,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     .indexOf('@')));
             myEdit.apply(); //sharedpreference saves the username for future user data query...
 
-            Intent intent = new Intent(getApplicationContext(), StudentHome.class);
+            Intent intent = new Intent(getApplicationContext(), TutorHome.class);
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    Login.this, card_signin, "card");
+                    TeacherLogin.this, card_signin, "card");
             startActivity(intent, options.toBundle());
         } else {
-            startActivity(new Intent(getApplicationContext(), StudentHome.class));
+            startActivity(new Intent(getApplicationContext(), TutorHome.class));
             finish();
         }
     }
@@ -154,6 +152,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
 
+                        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+                        myEdit.putString("usertype", "teacher");
+
+                        myEdit.apply();
                         //decides where to send next...
                         updateUI(mAuth.getCurrentUser());
                         return;
@@ -161,9 +166,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     layout_loading.setVisibility(View.GONE);
                     show_snackBar(Objects.requireNonNull(task.getException()).getMessage());
                 }).addOnCanceledListener(() -> show_snackBar("connection cancelled. try again later")).addOnFailureListener(e -> {
-            show_snackBar(e.getLocalizedMessage());
-            layout_loading.setVisibility(View.GONE);
-        });
+                    show_snackBar(e.getLocalizedMessage());
+                    layout_loading.setVisibility(View.GONE);
+                });
     }
 
     private void register(String email, String password) {
@@ -190,11 +195,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "in", Toast.LENGTH_SHORT).show();
 
+                        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+                        myEdit.putString("usertype", "teacher");
+
+                        myEdit.apply();
                         //uploads the data of newly signed in user...
                         uploadData();
                     } else {
                         text_progress_dialog.setText(Objects.requireNonNull(task.getException()).toString());
-                        Toast.makeText(Login.this, "Authentication failed. \nerror message: " + task.getException(),
+                        Toast.makeText(TeacherLogin.this, "Authentication failed. \nerror message: " + task.getException(),
                                 Toast.LENGTH_SHORT).show();
                         updateUI(null);
                     }
@@ -205,15 +217,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         //uploading data to realtime database with child node fetched from user mail [e.g; c183018@gmail.com -> username: c183018]
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("student data")
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("teacher data")
                 .child(edit_signup_mail.getText().toString().trim().substring(0, edit_signup_mail.getText().toString().trim()
                         .indexOf('@')).replaceAll("[^a-zA-Z0-9]", ""));
 
 
         //after data is successfully uploaded, calls updateUI...
-        databaseReference.setValue(new StudentData(edit_signup_mail.getText().toString().trim(), edit_signup_password.getText().toString().trim(), edit_fullname.getText().toString().trim(), edit_student_address.getText().toString().trim()
-                , edit_student_phone.getText().toString().trim(), edit_study_level.getText().toString().trim(), edit_student_institution.getText().toString().trim(),
-                edit_student_id.getText().toString().trim())).addOnCompleteListener(task1 -> updateUI(mAuth.getCurrentUser())).addOnCanceledListener(() -> Snackbar.make(edit_fullname, "oops! try again later!", Snackbar.LENGTH_SHORT).show());
+        databaseReference.setValue(new TeacherData(edit_signup_mail.getText().toString().trim(), edit_signup_password.getText().toString().trim(), edit_fullname.getText().toString().trim(), edit_student_address.getText().toString().trim()
+                , edit_student_phone.getText().toString().trim(), edit_study_level.getText().toString().trim(), edit_student_institution.getText().toString().trim()
+                )).addOnCompleteListener(task1 -> updateUI(mAuth.getCurrentUser())).addOnCanceledListener(() -> Snackbar.make(edit_fullname, "oops! try again later!", Snackbar.LENGTH_SHORT).show());
 
 
     }
@@ -222,7 +234,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         if (view == button_signup) {
             if (!edit_fullname.getText().toString().trim().isEmpty() && !edit_study_level.getText().toString().trim().isEmpty() &&
-                    !edit_student_phone.getText().toString().trim().isEmpty() && !edit_student_id.getText().toString().trim().isEmpty() &&
+                    !edit_student_phone.getText().toString().trim().isEmpty() &&
                     !edit_signup_password.getText().toString().trim().isEmpty() && !edit_signup_mail.getText().toString().trim().isEmpty() &&
                     !edit_student_institution.getText().toString().trim().isEmpty() && !edit_student_address.getText().toString().trim().isEmpty()) {
                 text_progress_dialog.setText("setting you up...");

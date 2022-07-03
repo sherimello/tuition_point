@@ -12,6 +12,7 @@
     </string-array>
 
     <string-array name="bd_districts">
+        <item>All Districts</item>
         <item>Dhaka</item>
         <item>Faridpur</item>
         <item>Gazipur</item>

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent, options.toBundle());
         }
         if (view == card_teacher) {
-            Intent intent = new Intent(MainActivity.this, TutorHome.class);
+            Intent intent = new Intent(MainActivity.this, TeacherLogin.class);
             // below method is used to make scene transition
             // and adding fade animation in it.
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(

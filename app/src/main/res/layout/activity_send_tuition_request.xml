@@ -116,6 +116,7 @@
                 app:layout_constraintTop_toBottomOf="@id/text_about_you">
 
                 <EditText
+                    android:id="@+id/edit_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -158,6 +159,7 @@
                 app:layout_constraintTop_toBottomOf="@id/cardView3">
 
                 <EditText
+                    android:id="@+id/edit_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

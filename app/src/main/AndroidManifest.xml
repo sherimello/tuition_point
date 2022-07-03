@@ -9,6 +9,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TuitionPoint">
         <activity
+            android:name=".TeacherLogin"
+            android:exported="false" />
+        <activity
+            android:name=".StudentProfile"
+            android:exported="false" />
+        <activity
             android:name=".SendTuitionRequest"
             android:exported="false" />
         <activity

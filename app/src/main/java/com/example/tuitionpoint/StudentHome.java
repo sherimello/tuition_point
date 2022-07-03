@@ -34,13 +34,13 @@ import java.util.Objects;
 public class StudentHome extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private TextView text_welcome, text_logout;
-    private CardView cardSend;
+    private CardView cardSend, card_profile;
     private EditText edit_name, edit_class, edit_subject, edit_days, edit_salary, edit_student_address, edit_description;
     private LinearLayout layout_loading;
     private FirebaseUser currentUser;
     private Constants constants;
     private Spinner spinner_districts;
-    private String district="";
+    private String district="", userNode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +48,17 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_student_home);
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        userNode = Objects.requireNonNull(Objects.requireNonNull(currentUser).getEmail()).substring(0, Objects.requireNonNull(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail())
+                .indexOf('@'));
+        clearUserName();
         constants = new Constants();
 
         text_welcome = findViewById(R.id.text_welcome);
         text_logout = findViewById(R.id.text_logout);
 
         cardSend = findViewById(R.id.cardSend);
+        card_profile = findViewById(R.id.card_profile);
 
         edit_name = findViewById(R.id.edit_name);
         edit_class = findViewById(R.id.edit_class);
@@ -91,6 +96,7 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
 
         text_logout.setOnClickListener(this);
         cardSend.setOnClickListener(this);
+        card_profile.setOnClickListener(this);
 
     }
 
@@ -125,6 +131,10 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
+        if (view == card_profile) {
+            startActivity(new Intent(getApplicationContext(), StudentProfile.class));
+            finish();
+        }
         if (view == cardSend) {
             if (!check_if_editText_is_empty()) {
                 layout_loading.setVisibility(View.VISIBLE);
@@ -178,7 +188,7 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
         assert key != null;
         databaseReference.child("Tuition Requests").child(key).setValue(new TuitionRequest(edit_name.getText().toString().trim(), district,
                         edit_class.getText().toString().trim(), edit_subject.getText().toString().trim(), edit_days.getText().toString().trim(),
-                        edit_salary.getText().toString().trim(), edit_student_address.getText().toString().trim(), edit_description.getText().toString().trim(), "0"))
+                        edit_salary.getText().toString().trim(), edit_student_address.getText().toString().trim(), edit_description.getText().toString().trim(), "0", userNode))
                 .addOnCompleteListener(task -> databaseReference.child("student data").child(constants.getUserName(Objects.requireNonNull(currentUser.getEmail())))
                         .child("requests").push().setValue(key).addOnCompleteListener(task1 -> {
                             show_snackBar("Request sent!");
@@ -200,6 +210,9 @@ public class StudentHome extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    private void clearUserName() {
+        userNode = userNode.replaceAll("[^a-zA-Z0-9]", "");
+    }
     //if no district is chosen...
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {

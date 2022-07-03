@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@color/white"
-    tools:context=".Login">
+    tools:context=".TeacherLogin">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -293,7 +293,7 @@
                             android:layout_marginRight="11dp"
                             android:drawableStart="@drawable/study_level"
                             android:drawablePadding="9dp"
-                            android:hint="e.g. HSC"
+                            android:hint="e.g. B.Sc 2nd year"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold"
@@ -301,22 +301,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/edit_fullname" />
 
-                        <EditText
-                            android:id="@+id/edit_student_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="11dp"
-                            android:layout_marginTop="11dp"
-                            android:layout_marginRight="11dp"
-                            android:drawableStart="@drawable/id"
-                            android:drawablePadding="9dp"
-                            android:hint="e.g. C183018"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/edit_study_level" />
 
                         <EditText
                             android:id="@+id/edit_student_institution"
@@ -327,13 +311,13 @@
                             android:layout_marginRight="11dp"
                             android:drawableStart="@drawable/institute"
                             android:drawablePadding="9dp"
-                            android:hint="e.g. XYZ School and College"
+                            android:hint="your job/educational institute"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/edit_student_id" />
+                            app:layout_constraintTop_toBottomOf="@+id/edit_study_level" />
 
                         <EditText
                             android:id="@+id/edit_student_phone"
@@ -378,7 +362,7 @@
                             android:layout_marginRight="11dp"
                             android:drawableStart="@drawable/email"
                             android:drawablePadding="9dp"
-                            android:hint="e.g. student@ymahil.com"
+                            android:hint="e.g. teacher@ymahil.com"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold"

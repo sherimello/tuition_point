@@ -3,6 +3,7 @@ package com.example.tuitionpoint;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -59,8 +60,17 @@ public class Splash extends AppCompatActivity {
                 finish();
                 return;
             }
-            startActivity(new Intent(getApplicationContext(), StudentHome.class));
-            finish();
+            SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+            String usertype = sh.getString("usertype", "");
+            if (usertype.equals("student")) {
+                startActivity(new Intent(getApplicationContext(), StudentHome.class));
+                finish();
+            }
+            else {
+                startActivity(new Intent(getApplicationContext(), TutorHome.class));
+                finish();
+            }
         }, 3300);
 
     }
